@@ -1,0 +1,95 @@
+/* global style */
+body {
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color:#4D4D4D;
+}
+
+table, th, td, ul, form {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+}
+
+ul {
+	list-style: none;
+}
+
+img {
+	border: 0;
+}
+
+a {
+	text-decoration: none;
+	color:#4D4D4D;
+}
+
+a:link {
+	
+}
+
+a:hover {
+	
+}
+
+a:active {
+	
+}
+
+a:visited {
+	
+}
+/* /global style */
+
+/* common style */
+.window_mark {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    background-color:#CCC;
+    z-index:1;
+    filter: Alpha(Opacity=60,style=0);
+    opacity: 0.6;
+    MozOpacity: 0.6;
+    KhtmlOpacity: 0.6;
+}
+.window_panel {
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: 5;
+}
+.window_shadow {
+    background-color: #000000;
+    position: absolute;
+    z-index: 4;
+    filter:progid:DXImageTransform.Microsoft.Blur(makeShadow=true,pixelRadius=3.0,shadowOpacity=0.5);
+}
+.window_panel_closeui {
+    padding: 3px;
+    border-bottom: 1px solid #CCCCCC;
+    height:19px;
+    font-size:12px;
+}
+.window_panel_closeui a {
+    float:right;
+}
+.window_panel_closeui .window_panel_title {
+    height:18px;
+    line-height:18px;
+    padding-left:20px;
+    padding-top:3px;
+    color:#888888;
+    font-weight:bold;
+    background-position:2px 2px;
+    background-repeat:no-repeat;
+}
+.window_panel_infoui {
+    border-top:1px solid #E6E6E6;
+    background-color:#EEEEEE;
+    height:16px;
+    line-height:16px;
+    padding:3px;
+}
+/* /common style */
