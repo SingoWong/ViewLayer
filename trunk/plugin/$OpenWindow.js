@@ -1,7 +1,6 @@
 
-ViewLayer.Class.OpenWindow = function (obj) {
+ViewLayer.Class.OpenWindow = function () {
 	
-	this.obj = obj;
 	this.tempTop = 0;
 	this.tempLeft = 0;
 	this.title = "Popup Window Title";
@@ -37,10 +36,20 @@ ViewLayer.Class.OpenWindow = function (obj) {
 		panel.appendChild(infoUI);
 		document.body.appendChild(panel);
 		$("window_panel_closeui").style.backgroundImage = "url("+ViewLayer.Path+"plugin/@OpenWindow/bg_title.png)";
-		$("window_panel_closeui").innerHTML = "<a href=\"javascript:"+this.obj+".closeWindow();\"><img src=\""+ViewLayer.Path+"plugin/@OpenWindow/close.gif\" art=\"Close\"></a>";
+		$("window_panel_closeui").innerHTML = "<a href=\"#\" id=\"btnOpenWindowClose\"><img src=\""+ViewLayer.Path+"plugin/@OpenWindow/close.gif\" art=\"Close\"></a>";
 		$("window_panel_closeui").innerHTML += "<div class=\"window_panel_title\" style=\"background-image:url("+ViewLayer.Path+"plugin/@OpenWindow/ico_title.png);\">"+this.title+"</div>";
 		$("window_panel_frameui").innerHTML = "<iframe height=\""+(height-25-25)+"\" width=\"100%\" src=\""+src+"\" frameborder=\"0\" scrolling=\"no\"></iframe>";
 		$("window_panel_infoui").innerHTML += "<img src=\""+ViewLayer.Path+"plugin/@OpenWindow/loading.gif\" id=\"window_panel_infoui_ico\" art=\"Loading\"/>";
+		
+		var closeWindow = this.closeWindow;
+		ViewLayer.addEvent({
+            element: $("btnOpenWindowClose"),
+	        type: "click",
+	        func: function(){
+		        closeWindow();
+		        return false;
+	        }
+        });
 		
 		var shadow = document.createElement("div");
 		shadow.setAttribute("id","window_shadow");
