@@ -11,68 +11,71 @@ ViewLayer.Class.OpenPopup = function () {
         
     }
     
-    this.Alter = function(message) {
+    this.Alert = function(message) {
+        if ($("basic_alert") != null) {
+            $remove($("basic_alert"));
+        }
         var isAutoHide = this.autohide;
-        var cbHiddenAlter = this.HiddenAlter;
-        var alter = document.createElement("div");
-        alter.setAttribute("id","basic_alter");
-	    alter.className = "basic_alter";
-	    alter.innerHTML = message;
-	    alter.style.top = (0 - this.top) + "px";
-	    alter.style.left = (document.body.clientWidth-200)/2 + "px";
-	    alter.style.width = this.width + "px";
+        var cbHiddenAlert = this.HiddenAlert;
+        var objalert = document.createElement("div");
+        objalert.setAttribute("id","basic_alert");
+	    objalert.className = "basic_alert";
+	    objalert.innerHTML = message;
+	    objalert.style.top = (0 - this.top) + "px";
+	    objalert.style.left = (document.body.clientWidth-200)/2 + "px";
+	    objalert.style.width = this.width + "px";
 	    
 	    if (!isAutoHide) {
 	        var btnOK = document.createElement("img");
-	        btnOK.setAttribute("id","basic_alter_img");
+	        btnOK.setAttribute("id","basic_alert_img");
 	        btnOK.setAttribute("src",ViewLayer.Path+"plugin/@OpenPopup/btn_ok.png");
-	        btnOK.className = "basic_alter_img";
-	        alter.appendChild(btnOK);
+	        btnOK.className = "basic_alert_img";
+	        objalert.appendChild(btnOK);
 	        
 	        this.height += 20;
 	    }
 	    
-	    alter.style.height = this.height + "px";
-	    alter.style.lineHeight = this.lineheight + "px";
+	    objalert.style.height = this.height + "px";
+	    objalert.style.lineHeight = this.lineheight + "px";
     	
-	    document.body.appendChild(alter);
+	    document.body.appendChild(objalert);
 	    
 	    if (!isAutoHide) {
 	        ViewLayer.addEvent({
-                element: $("basic_alter_img"),
+                element: $("basic_alert_img"),
 	            type: "click",
 	            func: function(){
-		            cbHiddenAlter(0);
+		            cbHiddenAlert(0);
 		            return false;
 	            }
             });
 	    }
     	
 	    ViewLayer.Slide({
-	        element: $("basic_alter"),
+	        element: $("basic_alert"),
 		    speed: 10,
 		    values: {
 		        top: 200
 		    },
 		    func: function() {
 		        if(isAutoHide) {
-        			cbHiddenAlter(3000);
+        			cbHiddenAlert(3000);
         	    }
 		    }
 	    });
     }
     
-    this.HiddenAlter = function(wait) {
+    this.HiddenAlert = function(wait) {
         setTimeout(function() {
             ViewLayer.Slide({
-	            element: $("basic_alter"),
+	            element: $("basic_alert"),
 		        speed: 10,
 		        values: {
 		            top: 200
 		        },
 		        func: function() {
         			ViewLayer.Slide({
-	                    element: $("basic_alter"),
+	                    element: $("basic_alert"),
 		                speed: 10,
 		                values: {
 		                    top: -200
