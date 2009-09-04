@@ -15,7 +15,7 @@ ViewLayer Copyright:
 	 * Initialize basic object
 	 */
 	w.ViewLayer = {};
-	ViewLayer.Version = "2.0.1";
+	ViewLayer.Version = "2.0.2";
 	ViewLayer.Class = {};
 	ViewLayer.Path = (function(){
 		var s = document.getElementsByTagName("script");
@@ -112,11 +112,11 @@ ViewLayer Copyright:
 	};
 	ViewLayer.removeEvent = function (param) {
 		if(param.element && param.element.removeEventListener)
-			param.element.removeEventListener(param.type,fn,false);
+			param.element.removeEventListener(param.type,param.func,false);
 		else if(param.element.detachEvent){
-			param.element.detachEvent("on"+param.type,obj[param.type+fn]);
-			param.element[param.type+fn]=null;
-			param.element["e"+param.type+fn]=null;
+			param.element.detachEvent("on"+param.type,obj[param.type+param.func]);
+			param.element[param.type+param.func]=null;
+			param.element["e"+param.type+param.func]=null;
 		}
 	};
 	
@@ -124,7 +124,7 @@ ViewLayer Copyright:
 	 * Ajax manager
 	 * 
 	 * Function: ViewLayer.ajax()
-	 * Arguments: param - {url, type(json/xml/text/script/html), data{action(GET/POST),sync(true/false),values}, timeout, error, success}
+	 * Arguments: param - {url, type(json/xml/text/soap), data{action(GET/POST),sync(true/false),values,method}, timeout, error, success}
 	 */
 	ViewLayer.ajax = function (param) {
 		try {
@@ -133,29 +133,28 @@ ViewLayer Copyright:
 			if (!param.data.action) { param.data.action = "GET"; }
 			if (!param.data.sync) { param.data.sync = true; }
 			if (!param.data.values) { param.data.values = null; }
+			if (!param.data.method) { param.data.method = null; }
 			
 			var reqObj = private_ro(param.type);
 			
 			if (ViewLayer.getBrowser() == "msie") reqObj.onreadystatechange = function () {
-				if(reqObj.readyState == 4) private_cb(param.success, param.type, reqObj);
+				if(reqObj.readyState == 4) private_cb(param.success, param.type, reqObj, param.data.method);
 			}
 			else reqObj.onload = function () {
-				private_cb(param.success, param.type, reqObj);
+				private_cb(param.success, param.type, reqObj, param.data.method);
 			}
+			
 			
 			if (param.type == "xml") {
 				reqObj.async = param.data.sync;
 				reqObj.load(param.url);
+				private_sh(param, reqObj);
 			} else {
 				reqObj.open(param.data.action, param.url, param.data.sync);
+				private_sh(param, reqObj);
+				reqObj.send(param.data.values);
 			}
-
-			if (param.data.action == "POST") {
-				reqObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			}
-			
-			if (param.type != "xml") { reqObj.send(param.data.values); }
-			
+						
 		} catch (e) {
 			if (param.error) { param.error(e) } else {
 				alert("Ajax Error:" + 
@@ -186,9 +185,13 @@ ViewLayer Copyright:
 	 */
 	ViewLayer.onReady = function (fun) {
 		if (ViewLayer.getBrowser() == "msie") {
-			document.onreadystatechange = function() { 
-				if(document.all && document.readyState == "complete") {
-					fun();
+		    document.write("<scr" + "ipt id=__ie_init defer=true " + "src=//:><\/script>");	
+		    var script = document.getElementById("__ie_init");
+		    if ( script ) {
+			    document.onreadystatechange = function() {
+		            if(document.readyState == "complete") {
+					    fun();
+				    }
 				}
 			}
 		} else {
@@ -214,6 +217,20 @@ ViewLayer Copyright:
 		if(window.navigator.userAgent.toLowerCase().indexOf("chrome")>-1)return "chrome";
 		return "other";
 	};
+	ViewLayer.getPosTop = function(o) {
+        var l = o.offsetTop;
+        while(o = o.offsetParent) {
+            l += o.offsetTop;
+        }
+        return l;
+    }
+    ViewLayer.getPosLeft = function(o) {
+        var l = o.offsetLeft;
+        while(obj = o.offsetParent) {
+            l += o.offsetLeft;
+        }
+        return l;
+    }
 	ViewLayer.Slide = function (param) {
 		if (param.element) {
 			param.speed = param.speed ? param.speed : 20;
@@ -369,19 +386,49 @@ ViewLayer Copyright:
 		}
 	}
 	
-	function private_cb (func, t, req) {
+	function private_cb (func, t, req, mtd) {
 		switch (t) {
 			case "xml" :
 				(ViewLayer.getBrowser() == "msie") ? func(req.xml) : func((new XMLSerializer()).serializeToString(req));
 				break;
+			case "soap" :
+			    func(eval("(" + req.responseXML.getElementsByTagName(mtd + "Result")[0].firstChild.nodeValue + ")"));
+			    break;
 			case "json" :
-				func(eval("(" + req.responseText + ")"));
+			    if (req.responseText=="") { req.responseText = "{\"issuccess\":\"false\", \"message\":\"SYNTAXERR\"}"; }
+    			func(eval("(" + req.responseText + ")"));
 				break;
 			case "text" :
 			default:
 				func(req.responseText);
 		}
-		
+	}
+	
+	function private_soadt (val, mtd) {
+	    return "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+			   "<soap:Envelope " +
+			   "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+			   "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" " +
+			   "xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+			   "<soap:Body>" +
+			   "<" + mtd + " xmlns=\"http://tempuri.org/\">" + val  + "</" + mtd + "></soap:Body></soap:Envelope>";
+	}
+	
+	function private_sh (param, reqObj) {
+	    if (param.data.action == "POST") {
+		    if (param.type == "soap") {
+			    param.data.values = private_soadt(param.data.values, param.data.method);
+				reqObj.setRequestHeader ("Content-Type", "text/xml; charset=utf-8"); 
+		        reqObj.setRequestHeader ("SOAPAction", "http://tempuri.org/" + param.data.method);
+			} else {
+    		    reqObj.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+    		}
+		} else {
+			if (param.type == "soap") {
+			    reqObj.setRequestHeader ("Content-Type","text/xml; charset=utf-8"); 
+		        reqObj.setRequestHeader ("SOAPAction","http://tempuri.org/" + param.data.method);
+			}
+		}
 	}
 	
 };})(window);
