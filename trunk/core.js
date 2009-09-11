@@ -21,6 +21,8 @@ ViewLayer Copyright:
 		var s = document.getElementsByTagName("script");
 		return s[s.length-1].getAttribute("src").replace(/(?:core.js).*/,"")
 	})();
+	ViewLayer.readyBound = false;
+	ViewLayer.isExecute = false;
 	
 	/**
 	 * Control DOM manager 
@@ -169,6 +171,9 @@ ViewLayer Copyright:
 	 * Displays and common method
 	 *
 	 * Function: ViewLayer.onReady()
+	 * Arguments: fun - execute function after all DOM was download complete
+	 *
+	 * Function: ViewLayer.onAllReady()
 	 * Arguments: fun - execute function after all object was download complete
 	 *
 	 * Function: ViewLayer.Import()
@@ -184,10 +189,32 @@ ViewLayer Copyright:
 	 *
 	 */
 	ViewLayer.onReady = function (fun) {
+	    if (ViewLayer.readyBound) {   
+            return;   
+        }   
+        ViewLayer.readyBound = true;
+                
+	    if (ViewLayer.getBrowser() == "msie") {
+	        document.write("<scr" + "ipt id=__ie_init defer=true " + 
+	                       "src=//:></script>");   
+            var script = document.getElementById("__ie_init");   
+            
+            if (script)
+                script.onreadystatechange = function(){
+                    if (this.readyState != "complete") return;
+                    if (!ViewLayer.isExecute) { fun(); ViewLayer.isExecute = true; }
+                };
+            
+            script = null;
+	    } else {
+	        document.addEventListener("DOMContentLoaded", fun, false);
+	    }
+	};
+	ViewLayer.onAllReady = function (fun) {
 		if (ViewLayer.getBrowser() == "msie") {
 		    document.write("<scr" + "ipt id=__ie_init defer=true " + "src=//:><\/script>");	
 		    var script = document.getElementById("__ie_init");
-		    if ( script ) {
+		    if (script) {
 			    document.onreadystatechange = function() {
 		            if(document.readyState == "complete") {
 					    fun();
