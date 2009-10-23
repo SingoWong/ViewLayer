@@ -253,7 +253,7 @@ ViewLayer Copyright:
     }
     ViewLayer.getPosLeft = function(o) {
         var l = o.offsetLeft;
-        while(obj = o.offsetParent) {
+        while(o = o.offsetParent) {
             l += o.offsetLeft;
         }
         return l;
@@ -423,7 +423,7 @@ ViewLayer Copyright:
 			    break;
 			case "json" :
 			    if (req.responseText=="") { req.responseText = "{\"issuccess\":\"false\", \"message\":\"SYNTAXERR\"}"; }
-    			func(eval("(" + req.responseText + ")"));
+    			else { func(eval("(" + req.responseText + ")")) };
 				break;
 			case "text" :
 			default:

@@ -2,187 +2,149 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
-<style type="text/css">
-body {
-	font-family: Tahoma, Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	color:#4D4D4D;
-}
-</style>
-<link href="test_data/global.css" rel="stylesheet" type="text/css" />
+<title>View Layer JavaScript Library</title>
+<link href="style/global.css" rel="stylesheet" type="text/css" />
 <script language="javascript" type="text/javascript" src="../core.js"></script>
 <script language="javascript" type="text/javascript">
-ViewLayer.Import("Cookie");
-ViewLayer.Import("DragDrop");
-ViewLayer.Import("OpenWindow");
-var Cookie;
-var w;
+//ViewLayer.Import("Cookie");
+//ViewLayer.Import("DragDrop");
+//ViewLayer.Import("OpenWindow");
+//var Cookie;
+//var w;
+var _height = 0;
+var _width = 200;
+
 ViewLayer.onReady(function(){
-	ViewLayer.addEvent({
-		element: $("btnTest"),
-		type: "click",
-		func: setValue
-	});
+	_height = (document.body.scrollHeight-68-30)+"px";
+	_owidth = (document.body.scrollWidth-201)+"px";
+	_cwidth = (document.body.scrollWidth-6)+"px";
+	_width = _width + "px";
 	
-	ViewLayer.addEvent({
-		element: $("btnClear"),
-		type: "click",
-		func: setClear
-	});
+	$("main").style.height = _height;
+	$("leftmenu").style.height = _height;
+	$("framemain").style.height = _height;
 	
-	ViewLayer.addEvent({
-		element: $("btnSlide"),
-		type: "click",
-		func: function(){
-			ViewLayer.Slide({
-				element: $("btnSlide"),
-				speed: 50,
-				values: {
-					width: 500,
-					height: 25
-				},
-				func: function() {
-					$("btnSlide").value = "DONE";
-				}
-			});
-		}
-	});
-	
-	ViewLayer.addEvent({
-		element: $("lbtnMore"),
-		type: "click",
-		func: function(){
-			ViewLayer.Slide({
-				element: $("pnlDesc"),
-				values: {
-					height: 50
-				},
-				func: function() {
-					$("lbtnMore").innerHTML = "关闭";
-				}
-			});
-		}
-	});
-	
-	ViewLayer.ajax({
-		url : "test_data/test.txt",
-		success : function (x) { $("test_ajax").innerHTML += "ajax for request text :: " + x + "<br/>"; }
-	});
-	
-	ViewLayer.ajax({
-		url : "test_data/json.txt",
-		type : "json",
-		success : function (x) { $("test_ajax").innerHTML += "ajax for request json :: " + x.Rows[0].key + "<br/>"; }
-	});
-	
-	ViewLayer.ajax({
-		url : "test_data/test.xml",
-		type : "xml",
-		data : {action : "GET"},
-		success : function (x) { $("test_ajax").innerHTML += "ajax for request xml DOM :: " + x + "<br/>"; }
-	});
-	
-	Cookie = new ViewLayer.Class.Cookie();
-	
-	new ViewLayer.Class.DragDrop("mover");//参数不为 string 的情况
-	new ViewLayer.Class.DragDrop("mover2");
-	new ViewLayer.Class.DragDrop("mover3");
-	var m = new ViewLayer.Class.DragDrop("mover4");
-	m.setRange(50,100,450,400);//限定拖动范围
-	
-	w = new ViewLayer.Class.OpenWindow("w");
-
+	$("leftmenu").style.width = _width;
+	$("framemain").style.width = _owidth;
 });
-
-function setValue() {
-	if($("btnTest").value != "Clicked") {
-		$("btnTest").value = "Clicked";
-	} else {
-		$("btnTest").value = "Empty";
-	}
-}
-
-function setClear() {
-	/*ViewLayer.removeEvent({
-		element: $("btnTest"),
-		type: "click"
-	});*/
-}
-
-
-function loadValue()
-{
-	$("input").value = Cookie.get("test");
-}
-function saveValue()
-{
-	Cookie.set("test",$("input").value);
-	alert("保存成功！");
-}
-function clearValue()
-{
-	Cookie.remove("test");
-	alert("清除成功！");
-}
+//	
+//	ViewLayer.addEvent({
+//		element: $("btnClear"),
+//		type: "click",
+//		func: setClear
+//	});
+//	
+//	ViewLayer.addEvent({
+//		element: $("btnSlide"),
+//		type: "click",
+//		func: function(){
+//			ViewLayer.Slide({
+//				element: $("btnSlide"),
+//				speed: 50,
+//				values: {
+//					width: 500,
+//					height: 25
+//				},
+//				func: function() {
+//					$("btnSlide").value = "DONE";
+//				}
+//			});
+//		}
+//	});
+//	
+//	ViewLayer.addEvent({
+//		element: $("lbtnMore"),
+//		type: "click",
+//		func: function(){
+//			ViewLayer.Slide({
+//				element: $("pnlDesc"),
+//				values: {
+//					height: 50
+//				},
+//				func: function() {
+//					$("lbtnMore").innerHTML = "关闭";
+//				}
+//			});
+//		}
+//	});
+//	
+//	ViewLayer.ajax({
+//		url : "test_data/test.txt",
+//		success : function (x) { $("test_ajax").innerHTML += "ajax for request text :: " + x + "<br/>"; }
+//	});
+//	
+//	ViewLayer.ajax({
+//		url : "test_data/json.txt",
+//		type : "json",
+//		success : function (x) { $("test_ajax").innerHTML += "ajax for request json :: " + x.Rows[0].key + "<br/>"; }
+//	});
+//	
+//	ViewLayer.ajax({
+//		url : "test_data/test.xml",
+//		type : "xml",
+//		data : {action : "GET"},
+//		success : function (x) { $("test_ajax").innerHTML += "ajax for request xml DOM :: " + x + "<br/>"; }
+//	});
+//	
+//	Cookie = new ViewLayer.Class.Cookie();
+//	
+//	new ViewLayer.Class.DragDrop("mover");//参数不为 string 的情况
+//	new ViewLayer.Class.DragDrop("mover2");
+//	new ViewLayer.Class.DragDrop("mover3");
+//	var m = new ViewLayer.Class.DragDrop("mover4");
+//	m.setRange(50,100,450,400);//限定拖动范围
+//	
+//	w = new ViewLayer.Class.OpenWindow("w");
+//
+//});
+//
+//function setValue() {
+//	if($("btnTest").value != "Clicked") {
+//		$("btnTest").value = "Clicked";
+//	} else {
+//		$("btnTest").value = "Empty";
+//	}
+//}
+//
+//function setClear() {
+//	/*ViewLayer.removeEvent({
+//		element: $("btnTest"),
+//		type: "click"
+//	});*/
+//}
+//
+//
+//function loadValue()
+//{
+//	$("input").value = Cookie.get("test");
+//}
+//function saveValue()
+//{
+//	Cookie.set("test",$("input").value);
+//	alert("保存成功！");
+//}
+//function clearValue()
+//{
+//	Cookie.remove("test");
+//	alert("清除成功！");
+//}
 </script>
 </head>
 
 <body>
-<input type="button" id="btnTest" value="unClick" />
-<input type="button" id="btnClear" value="Clear" />
-
-<input type="button" id="btnSlide" value="Slide" style="width:100px; height:25px;" />
-
-<br /><br />
-
-<div style="border:1px solid #CCCCCC; width:500px;">
-Here is the discription for more detail. 
-<div style="overflow:hidden; height:0px;" id="pnlDesc">
-	For ViewLayer License is Original BSD license, Copyright (C) 2009 Singo, &lt;http://www.03th.com&gt;<br />
-    Basic script is core.js in library.
-</div>
-<a href="javascript:void(0);" id="lbtnMore">Click here read more</a>
-
-</div>
-
-<hr />
-
-<div id="test_ajax"></div>
-
-<hr />
-
-<div id="test_cookie">
-<input type="input" value="" id="input">
-<input type="button" value="载入值" onclick="loadValue()">
-<input type="button" value="保存值" onclick="saveValue()">
-<input type="button" value="清除记录" onclick="clearValue()">（请在保存完后关闭浏览器再重新打开测试载入）
-</div>
-
-<hr />
-
-<div id="test_dragdrop">
-	<div style="border:1px solid #888;width:400px;height:300px;position:absolute;left:50;top:100;"></div>
-
-    <div id="mover" style="position:absolute; left:100px; top:130px; width:90px; height:90px; background-color:red;">请拖动我</div>
-    
-    <div id="mover2" style="position:absolute; left:800px; top:200px; width:90px; height:90px; background-color:blue;">请拖动我</div>
-    
-    <div id="mover3" style="position:absolute; left:470px; top:200px; width:90px; height:90px; background-color:green;">请拖动我</div>
-    
-    <div id="mover4" style="position:absolute; left:200px; top:260px; width:90px; height:90px;border:1px solid #000;background-color:pink;">
-        限定范围的拖动
+<div class="header">
+	<div class="nevlink">
+    	<a href="http://www.03th.com/viproot/singo">Blog</a>
+        <a href="mailto:singochina@gmail.com">Contant</a>
     </div>
+    <div class="toptitle"><img src="images/logo.png" alt="ViewLayer Javascript Library" /></div>
 </div>
-
-<hr />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-<div>
-<a href="javascript:w.openWindow(630,350,'http://www.google.cn');" class="btn_upload">
-    Popupwindows
-</a>
+<div class="main" id="main">
+	<div class="leftmenu" id="leftmenu"></div>
+    <div class="framemain" id="framemain"></div>
+</div>
+<div class="footer">
+	&copy; 2009 SingoWong - BSD License
 </div>
 </body>
 </html>
