@@ -1,0 +1,213 @@
+html {
+	margin: 0px;
+	overflow: hidden;
+}
+
+body {
+	margin: 0px;
+	overflow: hidden;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color:#4D4D4D;
+	background:#131210;
+}
+
+table, th, td, ul, form {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+}
+
+ul {
+	list-style: none;
+}
+
+img {
+	border: 0;
+}
+
+a {
+	text-decoration: none;
+	color:#4D4D4D;
+}
+
+a:link {
+	
+}
+
+a:hover {
+	
+}
+
+a:active {
+	
+}
+
+a:visited {
+	
+}
+
+/*-------------------*/
+
+.header {
+	height:40px;
+	padding:5px 5px 0 5px;
+}
+
+.main {
+	margin:5px 10px 10px 10px;
+}
+
+.main .demo_panel {
+	background-color:#FFFFFF;
+}
+
+.main .demo_panel .main_t {
+	height:3px;
+	font-size:0;
+}
+
+.main .demo_panel .main_t .main_t_r {
+	height:3px;
+	width:3px;
+	background-image:url(../images/i_tr.png);
+	background-position:right;
+	background-repeat:no-repeat;
+	float:right;
+	font-size:0;
+}
+
+.main .demo_panel .main_t .main_t_l {
+	height:3px;
+	width:3px;
+	background-image:url(../images/i_tl.png);
+	background-position:left;
+	background-repeat:no-repeat;
+	float:left;
+	font-size:0;
+}
+
+.main .demo_panel .download {
+	background-color:#DEDEDE;
+	padding:5px 5px 0 5px;
+	height::20px;
+	line-height:20px;
+}
+
+.main .demo_panel .download .rights {
+	color:#777;
+	float:right;
+	font-size:10px;
+	padding-right:5px;
+}
+
+.main .demo_panel .main_b {
+	background-color:#DEDEDE;
+	height:3px;
+	font-size:0;
+}
+
+.main .demo_panel .main_b .main_b_r {
+	height:3px;
+	width:3px;
+	background-image:url(../images/i_br.png);
+	background-position:right;
+	background-repeat:no-repeat;
+	float:right;
+	font-size:0;
+}
+
+.main .demo_panel .main_b .main_b_l {
+	height:3px;
+	width:3px;
+	background-image:url(../images/i_bl.png);
+	background-position:left;
+	background-repeat:no-repeat;
+	float:left;
+	font-size:0;
+}
+
+.download_panel {
+	color:#FFF;
+	overflow:hidden;
+	position:relative;
+}
+
+.download_panel .link_url {
+	padding:5px;
+	position:absolute;
+	bottom:0;
+	height:40px;
+	color:#CCC;
+	line-height:20px;
+}
+
+.content {
+	position:relative;
+	margin-top:10px;
+}
+
+.content .menu_panel {
+	height:100%;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background-image:url(../images/i_mb.png);
+	background-position:top;
+	background-repeat:repeat-x;
+	overflow:hidden;
+}
+
+.content .frame_panel {
+	height:100%;
+	position:absolute;
+	bottom:0;
+	right:0;
+}
+
+.content .menu_panel .menu_control_bar {
+	float:right;
+	width:10px;
+	background-image:url(../images/i_mb.png);
+	background-position:right;
+	background-repeat:repeat-y;
+	height:100%;
+}
+
+.content .menu_panel .menu_control_bar .menu_control_bar_r {
+	height:3px;
+	background-image:url(../images/i_mr.png);
+	background-position:right;
+	background-repeat:no-repeat;
+	font-size:0;
+}
+
+.content .menu_panel .menu_control_bar .menu_control_bar_b {
+	margin-top:230px;
+}
+
+.tips {
+	color:#999;
+}
+
+.content .menu_panel .menu_list {
+	width:150px;
+	padding:10px 0 0 10px;
+}
+
+.content .menu_panel .menu_list .menu_item {
+	margin-bottom:5px;
+}
+
+.content .menu_panel .menu_list .menu_item .menu_topic {
+	font-size:14px;
+	font-weight:bold;
+	padding:3px 0 3px 0;
+	border-bottom:1px solid #CCC;
+}
+
+.content .menu_panel .menu_list .menu_item .menu_sub .menu_sub_item {
+	padding:3px;
+	text-align:right;
+}

@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style/demo.css" rel="stylesheet" type="text/css" />
+<link href="style/shCore.css" rel="stylesheet" type="text/css" />
+<link href="style/shThemeDefault.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="lib/core.js"></script>
+<script language="javascript" type="text/javascript" src="lib/unit.js"></script>
+<script language="javascript" type="text/javascript" src="lib/external/shCore.js"></script>
+<script language="javascript" type="text/javascript" src="lib/external/shBrushJScript.js"></script>
+<script language="javascript" type="text/javascript">
+var title = {top:true, bottom:true, color:"#E5ECF9"};
+
+ViewLayer.onReady(function(){
+	setRounded(title, $("topic"));
+});
+
+SyntaxHighlighter.config.clipboardSwf = "images/clipboard.swf";
+SyntaxHighlighter.all();
+</script>
+<title>ViewLayer - $name()</title>
+</head>
+
+<body>
+    <div id="topic">$name()</div>
+    <div class="content">
+    	$name()方法等效于document.getElementsByName()，为了缩短开发中输入的代码量，ViewLayer提供了简洁的方式根据DOM的name获得DOM节点。<br />
+        $name()方法返回的结果为一个或多个DOM节点对象，如果指定的name不存在任何节点，则返回null。
+    </div>
+    <div class="content">
+    	页面中有以下HTML
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	&lt;div id=&quot;panel&quot;&gt;
+		&lt;span&gt;&lt;input type=&quot;checkbox&quot; name=&quot;chkDemo&quot; value=&quot;Demo1&quot;/&gt;&lt;/span&gt;
+		&lt;span&gt;&lt;input type=&quot;checkbox&quot; name=&quot;chkDemo&quot; value=&quot;Demo2&quot;/&gt;&lt;/span&gt;
+		&lt;span&gt;&lt;input type=&quot;checkbox&quot; name=&quot;chkDemo&quot; value=&quot;Demo2&quot;/&gt;&lt;/span&gt;
+	&lt;/div&gt;</pre>
+    </div>
+    <div class="content">
+    	以下代码可以获得所有name为chkDemo的节点
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	var obj = $name("chkDemo"); //得到的obj长度为3</pre>
+    </div>
+    <div class="content">
+    	该方法等效于
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	var obj = document.getElementsByName("chkDemo");</pre>
+    </div>
+    
+    <div class="content">
+    	演示代码：
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	&lt;span&gt;&lt;input type=&quot;checkbox&quot; name=&quot;chkDemo&quot; value=&quot;Demo1&quot;/&gt;&lt;/span&gt;
+	&lt;span&gt;&lt;input type=&quot;checkbox&quot; name=&quot;chkDemo&quot; value=&quot;Demo2&quot;/&gt;&lt;/span&gt;
+	&lt;span&gt;&lt;input type=&quot;checkbox&quot; name=&quot;chkDemo&quot; value=&quot;Demo3&quot;/&gt;&lt;/span&gt;
+	&lt;div id=&quot;output&quot;&gt;&lt;/div&gt;
+	
+	&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot;&gt;
+	var obj = $name(&quot;chkDemo&quot;);
+	
+	for (var i=0; i&lt;obj.length; i++) {
+		$(&quot;output&quot;).innerHTML += obj[i].value + &quot;&lt;/br&gt;&quot;;
+	}
+	&lt;/script&gt;</pre>
+    </div>
+    <div class="demo">
+    	<div class="demo_ctrl">
+        	<a href="#" onclick="onShowDemo($('pnlDemo'), this, $('lnkHideDemo'));return false;" id="lnkShowDemo">展开演示结果</a>
+            <a href="#" onclick="onHideDemo($('pnlDemo'), this, $('lnkShowDemo'));return false;" id="lnkHideDemo" style="display:none;">关闭演示结果</a>
+        </div>
+        <div class="demo_content" id="pnlDemo" style="height:0;">
+        	<br />
+            
+        	<span><input type="checkbox" name="chkDemo" value="Demo1"/></span>
+            <span><input type="checkbox" name="chkDemo" value="Demo2"/></span>
+            <span><input type="checkbox" name="chkDemo" value="Demo3"/></span>
+            <div id="output"></div>
+            
+            <script language="javascript" type="text/javascript">
+            var obj = $name("chkDemo");
+            
+            for (var i=0; i<obj.length; i++) {
+                $("output").innerHTML += obj[i].value + "</br>";
+            }
+            </script>
+        </div>
+    </div>
+</body>
+</html>
