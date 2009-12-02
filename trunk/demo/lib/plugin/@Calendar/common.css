@@ -1,0 +1,35 @@
+input.calendar_input
+{
+	float:left;
+}
+
+a.calendar
+{
+	display:block;
+	width:20px;
+	height:20px;
+	float:left;
+	margin-left:3px;
+	background-image:url(ico_calendar.gif);
+}
+
+a:hover.calendar
+{
+	background-position:0 20px;
+}
+
+a.active_calendar
+{
+	background-position:0 20px;
+}
+
+iframe.calendar_panel
+{
+	position:absolute;
+	z-index:99px;
+	width:145px;
+	height:150px;
+	padding:3px;
+	border:1px solid #CCC;
+	background-color:#FFF;
+}

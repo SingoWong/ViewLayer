@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style/demo.css" rel="stylesheet" type="text/css" />
+<link href="style/shCore.css" rel="stylesheet" type="text/css" />
+<link href="style/shThemeDefault.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="lib/core.js"></script>
+<script language="javascript" type="text/javascript" src="lib/unit.js"></script>
+<script language="javascript" type="text/javascript" src="lib/external/shCore.js"></script>
+<script language="javascript" type="text/javascript" src="lib/external/shBrushJScript.js"></script>
+<script language="javascript" type="text/javascript">
+var title = {top:true, bottom:true, color:"#E5ECF9"};
+
+ViewLayer.onReady(function(){
+	setRounded(title, $("topic"));
+});
+
+SyntaxHighlighter.config.clipboardSwf = "images/clipboard.swf";
+SyntaxHighlighter.all();
+</script>
+<title>ViewLayer - $remove()</title>
+</head>
+
+<body>
+    <div id="topic">$remove()</div>
+    <div class="content">
+    	$remove()方法根据DOM的id移除DOM节点。<br />
+    </div>
+    <div class="content">
+    	页面中有以下HTML
+    </div>
+    <pre class="brush: js">
+	&lt;div id=&quot;parent&quot;&gt;
+		&lt;span id=&quot;child1&quot;&gt;Demo Child HTML 1&lt;/span&gt;
+		&lt;span id=&quot;child2&quot;&gt;Demo Child HTML 2&lt;/span&gt;
+	&lt;/div&gt;</pre>
+    </div>
+    <div class="content">
+    	以下代码可以移除id为child2的节点
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	$remove("child2");</pre>
+    </div>
+    
+    <div class="content">
+    	演示代码：
+    </div>
+    <div class="code">
+    	<pre class="brush: js">	&lt;div id=&quot;parent&quot;&gt;
+		&lt;span id=&quot;child1&quot; style=&quot;background-color:#999;padding:3px;&quot;&gt;Demo Child HTML 1&lt;/span&gt;
+		&lt;span id=&quot;child2&quot; style=&quot;background-color:#999;padding:3px;&quot;&gt;Demo Child HTML 2&lt;/span&gt;
+	&lt;/div&gt;
+	
+	&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot;&gt;
+	$remove(&quot;child2&quot;);
+	&lt;/script&gt;</pre>
+    </div>
+    <div class="demo">
+    	<div class="demo_ctrl">
+        	<a href="#" onclick="onShowDemo($('pnlDemo'), this, $('lnkHideDemo'));return false;" id="lnkShowDemo">展开演示结果</a>
+            <a href="#" onclick="onHideDemo($('pnlDemo'), this, $('lnkShowDemo'));return false;" id="lnkHideDemo" style="display:none;">关闭演示结果</a>
+        </div>
+        <div class="demo_content" id="pnlDemo" style="height:0">
+        	<br />
+            
+            <div id="parent">
+                <span id="child1" style="background-color:#999;padding:3px;">Demo Child HTML 1</span>
+                <span id="child2" style="background-color:#999;padding:3px;">Demo Child HTML 2</span>
+            </div>
+            
+            <script language="javascript" type="text/javascript">
+            $remove("child2");
+            </script>
+                
+            <div class="clear"></div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style/global.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="lib/core.js"></script>
+<script language="javascript" type="text/javascript" src="lib/demo.js"></script>
+<script language="javascript" type="text/javascript">
+var objHeight = 0;
+var objDefaultMenuWidth = 180;
+var objCurrMenuWidth = objDefaultMenuWidth;
+var objWidth = 0;
+var objDownloadPanelHeight = 50;
+var lock = false;
+
+ViewLayer.onReady(function(){
+	initSize();
+	
+	if (ViewLayer.getBrowser()=="msie") {
+		ViewLayer.addEvent({
+			element: $("header"),
+			type: "resize",
+			func: function() {
+				initSize();
+			}
+		});
+	} else {
+		window.onresize = initSize;
+	}
+	
+	ViewLayer.addEvent({
+        element: $("lnkHideMenu"),
+        type: "click",
+        func: function() {
+            onMenuClose();
+			return false;
+        }
+    });
+	
+	ViewLayer.addEvent({
+        element: $("lnkShowMenu"),
+        type: "click",
+        func: function() {
+            onMenuShow();
+			return false;
+        }
+    });
+	
+	ViewLayer.addEvent({
+        element: $("lnkUIShowDownload"),
+        type: "click",
+        func: function() {
+            onShowDownload();
+			return false;
+        }
+    });
+	
+	ViewLayer.addEvent({
+        element: $("lnkUIHideDownload"),
+        type: "click",
+        func: function() {
+            onHideDownload();
+			return false;
+        }
+    });
+});
+
+var initSize = function() {
+	objWidth = document.body.scrollWidth-20-objCurrMenuWidth;
+	objHeight = document.documentElement.clientHeight-100;
+	
+	$("content").style.height = (objHeight - $("download_panel").clientHeight) + "px";
+	$("menu_panel").style.width = objCurrMenuWidth + "px";
+	$("frame_panel").style.width = objWidth + "px";
+}
+</script>
+<title>ViewLayer javascript library demo</title>
+</head>
+
+<body>
+<div class="header" id="header">
+	<img src="images/logo.png" alt="ViewLayer" />
+</div>
+<div class="main">
+	<div class="demo_panel">
+    	<div class="main_t"><div class="main_t_r"></div><div class="main_t_l"></div></div>
+        <div class="content" id="content" style="height:0;">
+            <div class="menu_panel" id="menu_panel">
+            	<div class="menu_control_bar">
+                	<div class="menu_control_bar_r"></div>
+                	<div class="menu_control_bar_b">
+                    	<a href="#" id="lnkHideMenu" style="display:;"><img src="images/btn_mco.png" align="收起导航" /></a>
+                        <a href="#" id="lnkShowMenu" style="display:none;"><img src="images/btn_mco.png" align="显示导航" /></a>
+                    </div>
+                </div>
+                <div class="menu_list">
+                	<div class="menu_item">
+                    	<div class="menu_topic"><a href="#">基本使用规则</a></div>
+                        <div class="menu_sub">
+                        	<div class="menu_sub_item"><a href="beginning.html" target="demo">导语</a></div>
+                            <div class="menu_sub_item"><a href="howtouse.html" target="demo">如何使用</a></div>
+                            <div class="menu_sub_item"><a href="commonfunc.html" target="demo">常用方法</a></div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                    	<div class="menu_topic"><a href="#">DOM 管理</a></div>
+                        <div class="menu_sub">
+                        	<div class="menu_sub_item"><a href="$.html" target="demo">$()</a></div>
+                            <div class="menu_sub_item"><a href="$name.html" target="demo">$name()</a></div>
+                            <div class="menu_sub_item"><a href="$tag.html" target="demo">$tag()</a></div>
+                            <div class="menu_sub_item"><a href="$parent.html" target="demo">$parent()</a></div>
+                            <div class="menu_sub_item"><a href="$child.html" target="demo">$child()</a></div>
+                            <div class="menu_sub_item"><a href="$remove.html" target="demo">$remove()</a></div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                    	<div class="menu_topic"><a href="#">事件管理</a></div>
+                        <div class="menu_sub">
+                        	<div class="menu_sub_item"><a href="addevent.html" target="demo">addEvent()</a></div>
+                            <div class="menu_sub_item"><a href="removeevent.html" target="demo">removeEvent()</a></div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                    	<div class="menu_topic"><a href="#">Ajax请求</a></div>
+                        <div class="menu_sub">
+                        	<div class="menu_sub_item"><a href="ajax.html" target="demo">Ajax的使用</a></div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                    	<div class="menu_topic"><a href="#">效果</a></div>
+                        <div class="menu_sub">
+                        	<div class="menu_sub_item"><a href="slide.html" target="demo">Slide()</a></div>
+                        </div>
+                    </div>
+                    <div class="menu_item">
+                    	<div class="menu_topic"><a href="#">插件扩展</a></div>
+                        <div class="menu_sub">
+                        	<div class="menu_sub_item"><a href="autocomplete.html" target="demo">$Autocomplete</a></div>
+                            <div class="menu_sub_item"><a href="openwindow.html" target="demo">$OpenWindow</a></div>
+                            <div class="menu_sub_item"><a href="cookie.html" target="demo">$Cookie.js</a></div>
+                            <div class="menu_sub_item"><a href="dragdrop.html" target="demo">$DragDrop.js</a></div>
+                            <div class="menu_sub_item"><a href="yourplugin.html" target="demo">自定义插件</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="frame_panel" id="frame_panel"><iframe src="beginning.html" name="demo" frameborder="0" width="100%" height="100%"></iframe></div>
+        </div>
+        <div class="download">
+        	<span class="rights">Copyright &copy; 2009-2010 SingoWong &lt;singochina@gmail.com&gt;</span>
+        	<span id="lnkShowDownload" style="display:;"><a href="#" id="lnkUIShowDownload">显示下载地址</a></span>
+           	<span id="lnkHideDownload" style="display:none;">
+            	<a href="#" id="lnkUIHideDownload">隐藏</a>
+            	<span class="tips">点击下面链接或点击右键另存为下载载</span>
+            </span>
+        </div>
+        <div class="main_b"><div class="main_b_r"></div><div class="main_b_l"></div></div>
+    </div>
+    <div class="download_panel" id="download_panel" style="height:0;">
+    	<div class="link_url">
+        	Release version <a href="http://www.viewlayer.cn/download/viewlayer_release_2.0.zip">http://www.viewlayer.cn/download/viewlayer_release_2.0.zip</a><br />
+	        Source code version <a href="http://www.viewlayer.cn/download/viewlayer_src_2.0.zip">http://www.viewlayer.cn/download/viewlayer_src_2.0.zip</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,110 @@
+body {
+	margin:auto 10px 10px 10px;
+	font-family: Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color:#4D4D4D;
+	background:#FFF;
+}
+
+table, th, td, ul, form {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	font-size: 12px;
+}
+
+ul {
+	list-style: none;
+}
+
+img {
+	border: 0;
+}
+
+a {
+	text-decoration: none;
+	color:#4D4D4D;
+}
+
+a:link {
+	
+}
+
+a:hover {
+	
+}
+
+a:active {
+	
+}
+
+a:visited {
+	
+}
+
+p {
+	margin:20px 0 0 0;
+}
+
+pre {
+	border:1px solid #CCC;
+}
+
+.clear {
+	clear:both;
+}
+
+div.RoundedCorner b.rtop, b.rbottom{
+	display:block;
+}
+div.RoundedCorner b.rtop b, b.rbottom b{
+	display:block;
+	height:1px;
+	overflow:hidden;
+}
+b.r1{margin: 0 4px;}
+b.r2{margin: 0 2px;}
+b.r3{margin: 0 1px;}
+b.rtop b.r4, b.rbottom b.r4{
+	margin: 0 1px;
+	height: 1px;
+}
+.rcontent {
+	padding:3px 7px;
+}
+
+#topic {
+	font-size:14px;
+	font-weight:bold;
+}
+
+.content {
+	padding:10px;
+	line-height:20px;
+}
+
+.code {
+	margin:10px;
+	border:1px solid #EAEAEA;
+	padding:10px 0;
+}
+
+.tips {
+	color:#999;
+}
+
+.demo {
+	margin:10px;
+	border:1px solid #EAEAEA;
+	height:auto;
+}
+
+.demo .demo_ctrl {
+	padding:5px;
+	background-color:#EAEAEA;
+}
+
+.demo .demo_content {
+	padding:5px;
+	overflow:hidden;
+}

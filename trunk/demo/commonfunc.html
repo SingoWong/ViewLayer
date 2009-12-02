@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style/demo.css" rel="stylesheet" type="text/css" />
+<link href="style/shCore.css" rel="stylesheet" type="text/css" />
+<link href="style/shThemeDefault.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="lib/core.js"></script>
+<script language="javascript" type="text/javascript" src="lib/unit.js"></script>
+<script language="javascript" type="text/javascript" src="lib/external/shCore.js"></script>
+<script language="javascript" type="text/javascript" src="lib/external/shBrushJScript.js"></script>
+<script language="javascript" type="text/javascript">
+var title = {top:true, bottom:true, color:"#E5ECF9"};
+
+ViewLayer.onReady(function(){
+	setRounded(title, $("topic"));
+});
+
+SyntaxHighlighter.config.clipboardSwf = "images/clipboard.swf";
+SyntaxHighlighter.all();
+</script>
+<title>ViewLayer - 如何使用</title>
+</head>
+
+<body>
+    <div id="topic">如何使用</div>
+    <div class="content">
+    ViewLayer准备了一些常用的方法<br />
+    <p>
+    	<b>ViewLayer.onReady()</b><br />
+        功能：页面所有DOM元素都加载完成后执行脚本。<br />
+        当您有一些Javascript脚本需要在页面加载完成时执行，但又担心脚本放在&lt;head&gt;&lt;/head&gt;中DOM还没完全加载完成时被执行，则可以使用ViewLayer.onReady方法，确保页面中所有DOM元素都加载完成后执行。
+    </p>
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	ViewLayer.onReady(funtion(){
+		//这里放入你要执行的代码
+		document.write("Hey，所有的DOM都加载完成了哦。");
+	})</pre>
+    </div>
+    
+    <div class="content">
+    <p>
+    	<b>ViewLayer.onAllReady()</b><br />
+        功能：页面所有元素（包括DOM/图片等）都加载完成后执行脚本。<br />
+        该方法和ViewLayer.onReady相似，但该方法则是待页面中所有包括图片，多媒体元素都加载完成后才执行。
+    </p>
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	ViewLayer.onAllReady(funtion(){
+		//这里放入你要执行的代码
+		document.write("Hey，所有的元素都加载完成了哦。");
+	})</pre>
+    </div>
+    
+    <div class="content">
+    <p>
+    	<b>ViewLayer.Include(path, file)</b><br />
+        功能：加载外部脚本。<br />
+        参数：path为要加载的脚本文件的目录，file为要加载的脚本文件文件名<br />
+        使用ViewLayer加载一个js脚本文件。
+    </p>
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	ViewLayer.Include("script", "hello.js"); //这里加载了一个script目录下的hello.js脚本文件</pre>
+    </div>
+    
+    <div class="content">
+    <p>
+    	<b>ViewLayer.getBrowser()</b><br />
+        功能：获取当前用户所使用的浏览器。<br />
+        获得当前用户所使用的浏览器类型，可能出现的结果为msie, firefox, opera, chrome
+    </p>
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	if (ViewLayer.getBrowser() == "msie") {
+    	
+    	alert("现在用的是Microsoft Internet Explorer");
+        
+    } else if (ViewLayer.getBrowser() == "firefox") {
+    	
+    	alert("现在用的是Mozilla Firefox");
+        
+    } else if (ViewLayer.getBrowser() == "opera") {
+    	
+    	alert("现在用的是Opera");
+        
+    } else if (ViewLayer.getBrowser() == "chrome") {
+    	
+    	alert("现在用的是Google Chrome");
+        
+    } else{
+    	
+    	alert("现在用的是未知浏览器");
+        
+    }</pre>
+    </div>
+    
+    <div class="content">
+    <p>
+    	<b>ViewLayer.getPosTop(), ViewLayer.getPosLeft()</b><br />
+        功能：获取指定元素在页面的横坐标和纵坐标<br />
+        <div class="tips">Tips:以下例子中使用了ViewLayer的DOM方法$()，详细说明请参阅<a href="$.html" target="_self">DOM $()</a></div>
+    </p>
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+    var obj = $(&quot;panel&quot;); //获取id为panel的元素
+    var x = ViewLayer.getPosLeft(obj);  //获得该元素在页面中的横坐标
+	var y = ViewLayer.getPosTop(obj);   //获得该元素在页面中的纵坐标</pre>
+    </div>
+    
+    <div class="content">
+    <p>
+    	<b>扩展方法</b><br />
+    </p>
+    </div>
+    <div class="code">
+    	<pre class="brush: js">	var obj_t = &quot; demo &quot;.trim()         //得到结果为&quot;demo&quot;
+	var obj_n = &quot;abc123&quot;.getNum         //得到结果为&quot;123&quot;
+	var obj_e = &quot;abc123&quot;.getEN          //的到结果为&quot;abc&quot;
+	var obj_c = &quot;中文abc123&quot;.getCN       //得到结果为&quot;中文&quot;
+    var obj_l = &quot;abc123&quot;.left(4)        //得到结果为&quot;abc1&quot;
+	var obj_r = &quot;abc123&quot;.right(4)       //得到结果为&quot;c123&quot;
+	var obj_h = &quot;&lt;script&gt;&quot;.HTMLEncode() //得到结果为&quot;&quot;
+	var obj_o = 36.fillZero(5)          //得到结果为00036
+	var obj_a = 
+	var obj_i = 
+	var obj_f = 
+        </pre>
+    </div>
+</body>
+</html>

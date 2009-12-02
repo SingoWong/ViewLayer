@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="style/demo.css" rel="stylesheet" type="text/css" />
+<link href="style/shCore.css" rel="stylesheet" type="text/css" />
+<link href="style/shThemeDefault.css" rel="stylesheet" type="text/css" />
+<script language="javascript" type="text/javascript" src="lib/core.js"></script>
+<script language="javascript" type="text/javascript" src="lib/unit.js"></script>
+<script language="javascript" type="text/javascript" src="lib/external/shCore.js"></script>
+<script language="javascript" type="text/javascript" src="lib/external/shBrushJScript.js"></script>
+<script language="javascript" type="text/javascript">
+var title = {top:true, bottom:true, color:"#E5ECF9"};
+
+ViewLayer.onReady(function(){
+	setRounded(title, $("topic"));
+});
+
+SyntaxHighlighter.config.clipboardSwf = "images/clipboard.swf";
+SyntaxHighlighter.all();
+</script>
+<title>ViewLayer - 如何使用</title>
+</head>
+
+<body>
+	<div id="topic">如何使用</div>
+    <div class="content">
+    	下载ViewLayer文件压缩包后，解压放入目标站点中（放置位置可随意），在需要使用ViewLayer的页面中引用ViewLayer目录中的core.js文件。
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+    &lt;html xmlns=&quot;http://www.w3.org/1999/xhtml&quot;&gt;
+	&lt;head&gt;
+	&lt;title&gt;Hello ViewLayer&lt;/title&gt;
+	&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot; src=&quot;viewlayer/core.js&quot;&gt;&lt;/script&gt;
+    &lt;/head&gt;
+	...</pre> 
+    </div>
+    <div class="content">
+    	添加应用后即可在该页面中使用ViewLayer的方法。
+    </div>
+    <div class="code">
+    	<pre class="brush: js">
+	&lt;script language=&quot;javascript&quot; type=&quot;text/javascript&quot;&gt;
+    ViewLayer.onReadu(function(){
+		alert(&quot;Hello ViewLayer&quot;);
+	});
+	&lt;/script&gt;</pre>
+    </div>
+</body>
+</html>
